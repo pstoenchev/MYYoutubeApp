@@ -43,7 +43,7 @@ extension SecondViewController {
          titleLabel.text = video?.title
          // set date on label
          let dateF = DateFormatter()
-         dateF.dateFormat = "YYY, MM, DD"
+         dateF.dateFormat = "MM-dd-yyyy"
          dateLabel.text = dateF.string(from: video!.published)
          textView.text = video?.description
          

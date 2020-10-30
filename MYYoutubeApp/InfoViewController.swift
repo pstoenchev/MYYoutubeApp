@@ -10,8 +10,8 @@ import UIKit
 // MARK: - INFO FOR APP
 final class InfoViewController: UIViewController {
     
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var appText: UITextView!
+    @IBOutlet private weak var label: UILabel!
+    @IBOutlet private weak var appText: UITextView!
     
     
     override func viewDidLoad() {

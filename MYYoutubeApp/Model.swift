@@ -21,13 +21,13 @@ class Model  {
     
     // Mark: - get Videos from api Youtube.
     func getVideos() {
-        let url = URL(string: GlobalConsts.API_URL)
+  
         
-        guard url != nil else { return }
+        guard let url =  URL(string: GlobalConsts.API_URL) else { return }
         
         let session = URLSession.shared
         
-        let dataTask = session.dataTask(with: url!) { (data, response,
+        let dataTask = session.dataTask(with: url) { (data, response,
             error) in
             
             if error != nil || data == nil {
@@ -47,9 +47,6 @@ class Model  {
                 }
                 //Debug
                 //     print(response.items?[2] ?? "ok")
-                
-                
-                
             }
             catch {
                 print("not okay")
