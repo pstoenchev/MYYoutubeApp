@@ -7,24 +7,46 @@
 //
 
 import UIKit
-
+import WebKit
+/// MARK: - you can see vide clip
 class SecondViewController: UIViewController {
-
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var textView: UITextView!
+    
+    var video:Video?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+}
+// logic for video clip date, vio, label for info
+extension SecondViewController {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    override func viewWillAppear(_ animated: Bool) {
+         titleLabel.text = ""
+         dateLabel.text = ""
+         textView.text = ""
+         
+         guard video != nil else { return }
+         //Mark: - youtube URL,
+         let url = "https://www.youtube.com/embed/"
+         let embededUrl = url + video!.videoId
+         let parseUrl = URL(string: embededUrl)
+         let request = URLRequest(url: parseUrl!)
+         webView.load(request)
+         
+         titleLabel.text = video?.title
+         // set date on label
+         let dateF = DateFormatter()
+         dateF.dateFormat = "YYY, MM, DD"
+         dateLabel.text = dateF.string(from: video!.published)
+         textView.text = video?.description
+         
+     }
+     
 }

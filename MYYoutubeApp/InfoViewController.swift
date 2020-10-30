@@ -7,24 +7,40 @@
 //
 
 import UIKit
-
-class InfoViewController: UIViewController {
-
+// MARK: - INFO FOR APP
+final class InfoViewController: UIViewController {
+    
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var appText: UITextView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
+    
+}
+//Mark: - change Color
+extension InfoViewController {
+    @IBAction func themeswitched(_ sender: UISwitch) {
+        
+        if sender.isOn == true {
+            view.backgroundColor = UIColor.black
+            label.textColor = .white
+            appText.textColor = .white
+            appText.backgroundColor = .black
+           
+        } else {
+            view.backgroundColor = UIColor.white
+            label.textColor = .black
+            appText.textColor = .black
+            appText.backgroundColor = .white
+            
+        }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+       
+       }
 }
