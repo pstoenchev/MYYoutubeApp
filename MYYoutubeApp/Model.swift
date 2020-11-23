@@ -12,7 +12,6 @@ import Foundation
 protocol ModelDelegagate {
     
     func videoFetch(_ videos:[Video])
-    
 }
 
 class Model  {
@@ -21,12 +20,9 @@ class Model  {
     
     // Mark: - get Videos from api Youtube.
     func getVideos() {
-  
         
         guard let url =  URL(string: GlobalConsts.API_URL) else { return }
-        
         let session = URLSession.shared
-        
         let dataTask = session.dataTask(with: url) { (data, response,
             error) in
             
