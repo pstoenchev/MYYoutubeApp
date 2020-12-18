@@ -7,26 +7,33 @@
 //
 
 import UIKit
+
+
 //Mark - Start point app.
- class ViewController: UIViewController {
+ final class ViewController: UIViewController {
 
     //Mark - Table View
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     var model = Model()
     var videos = [Video]()
     
     override func viewDidLoad() {
     
+        tableView.tableFooterView = UIView()
         
         super.viewDidLoad()
         self.title = "Drift channel!"
         // Do any additional setup after loading the view.
         model.getVideos()
         model.delegate = self
+        spinner.startAnimating()
     }
 }
+
 // Mark: - Table view implementation.
+
 extension ViewController: UITableViewDataSource {
     // count of cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +45,7 @@ extension ViewController: UITableViewDataSource {
         YouTubeVideoTableViewCell
         let video = self.videos[indexPath.row]
         cell.setVideoCell(video)
+        spinner.stopAnimating()
         return cell
     }
 }
@@ -45,6 +53,7 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          tableView.deselectRow(at: indexPath, animated: true)
+        UIPasteboard.general.string = videos[0].title
             
     }
 }
@@ -53,8 +62,8 @@ extension ViewController: ModelDelegagate {
     func videoFetch(_ videos: [Video]) {
         
         self.videos = videos
-        
         tableView.reloadData()
+        spinner.stopAnimating()
     }
     
     /// For error in app give this function, who give 1 alert.
@@ -74,7 +83,5 @@ extension ViewController {
         let selectedVideo = videos[tableView.indexPathForSelectedRow!.row]
         let destination = segue.destination as? SecondViewController
         destination?.video = selectedVideo
-        
-        
     }
 }

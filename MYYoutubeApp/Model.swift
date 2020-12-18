@@ -8,18 +8,18 @@
 
 import Foundation
 
+
 //use protocol for method
 protocol ModelDelegagate {
     
     func videoFetch(_ videos:[Video])
-    
 }
 
 class Model  {
     
     var delegate: ModelDelegagate?
     
-    // Mark: - get Videos from api Youtube.
+    /// Mark: - get Videos from api Youtube.
     func getVideos() {
   
         
@@ -41,7 +41,7 @@ class Model  {
                 let response = try decoder.decode(Response.self, from: data!)
                 
                 if response.items != nil {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self.delegate?.videoFetch(response.items!)
                     }
                 }
