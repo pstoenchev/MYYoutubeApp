@@ -36,11 +36,7 @@ class YouTubeVideoTableViewCell: UITableViewCell {
         datef.dateFormat = "MM-dd-yyyy"
         
         dateVideoLabel.text = datef.string(from: video!.published)
-        
-        
-        guard self.video!.thumbnail != "" else {
-            return
-        }
+        guard self.video!.thumbnail != "" else { return }
         
         if let cachedData =
             CacheManager.getVidoChache(self.video!.thumbnail) {
@@ -67,7 +63,7 @@ class YouTubeVideoTableViewCell: UITableViewCell {
                 
                 let image = UIImage(data: data!)
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
                     self.videoImage.image = image
                 }
             }
